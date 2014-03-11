@@ -1,10 +1,10 @@
-%define major 4
+%define major 5
 %define libname %mklibname KF5ThreadWeaver %{major}
 %define devname %mklibname KF5ThreadWeaver -d
 %define debug_package %{nil}
 
 Name: threadweaver
-Version: 4.96.0
+Version: 4.97.0
 Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/unstable/frameworks/%{version}/%{name}-%{version}.tar.xz
 Summary: KDE Frameworks 5 threading library
@@ -16,6 +16,7 @@ BuildRequires: extra-cmake-modules5
 BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5Test)
 BuildRequires: qmake5
+BuildRequires: ninja
 
 %description
 KDE Frameworks 5 threading library
@@ -37,18 +38,19 @@ Development files (Headers etc.) for %{name}.
 
 %prep
 %setup -q
-%cmake
+%cmake -G Ninja
 
 %build
-%make -C build
+ninja -C build
 
 %install
-%makeinstall_std -C build
+DESTDIR="%{buildroot}" ninja install -C build
 mkdir -p %{buildroot}%{_libdir}/qt5
 mv %{buildroot}%{_prefix}/mkspecs %{buildroot}%{_libdir}/qt5/
 
 %files -n %{libname}
-%{_libdir}/*.so.%{major}*
+%{_libdir}/*.so.%{major}
+%{_libdir}/*.so.%{version}
 
 %files -n %{devname}
 %{_includedir}/*
