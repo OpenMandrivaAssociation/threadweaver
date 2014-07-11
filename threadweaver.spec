@@ -5,7 +5,7 @@
 
 Name: threadweaver
 Version: 5.0.0
-Release: 1
+Release: 2
 Source0: http://ftp5.gwdg.de/pub/linux/kde/stable/frameworks/%{version}/%{name}-%{version}.tar.xz
 Summary: KDE Frameworks 5 threading library
 URL: http://kde.org/
