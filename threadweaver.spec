@@ -5,7 +5,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: threadweaver
-Version: 5.7.0
+Version: 5.8.0
 Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 Summary: KDE Frameworks 5 threading library
@@ -20,14 +20,14 @@ BuildRequires: qmake5
 BuildRequires: ninja
 
 %description
-KDE Frameworks 5 threading library
+KDE Frameworks 5 threading library.
 
 %package -n %{libname}
 Summary: KDE Frameworks 5 threading library
 Group: System/Libraries
 
 %description -n %{libname}
-KDE Frameworks 5 threading library
+KDE Frameworks 5 threading library.
 
 %package -n %{devname}
 Summary: Development files for %{name}
