@@ -5,8 +5,8 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: threadweaver
-Version:	5.56.0
-Release:	2
+Version:	5.57.0
+Release:	1
 Source0: http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 Summary: KDE Frameworks 5 threading library
 URL: http://kde.org/
@@ -19,6 +19,8 @@ BuildRequires: pkgconfig(Qt5Test)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Network)
 BuildRequires: pkgconfig(Qt5Xml)
+# For QCH format docs
+BuildRequires: qt5-assistant
 
 %description
 KDE Frameworks 5 threading library.
@@ -38,8 +40,16 @@ Requires: %{libname} = %{EVRD}
 %description -n %{devname}
 Development files (Headers etc.) for %{name}.
 
+%package -n %{name}-devel-docs
+Summary: Developer documentation for %{name} for use with Qt Assistant
+Group: Documentation
+Suggests: %{devname} = %{EVRD}
+
+%description -n %{name}-devel-docs
+Developer documentation for %{name} for use with Qt Assistant
+
 %prep
-%setup -q
+%autosetup -p1
 %cmake_kde5
 
 %build
@@ -57,3 +67,6 @@ Development files (Headers etc.) for %{name}.
 %{_libdir}/*.so
 %{_libdir}/cmake/*
 %{_libdir}/qt5/mkspecs/modules/*
+
+%files -n %{name}-devel-docs
+%{_docdir}/qt5/*.{tags,qch}
