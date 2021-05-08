@@ -3,9 +3,11 @@
 %define devname %mklibname KF5ThreadWeaver -d
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
+%global optflags %{optflags} -O3
+
 Name: threadweaver
 Version:	5.82.0
-Release:	1
+Release:	2
 Source0: http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 Summary: KDE Frameworks 5 threading library
 URL: http://kde.org/
@@ -46,7 +48,7 @@ Group: Documentation
 Suggests: %{devname} = %{EVRD}
 
 %description -n %{name}-devel-docs
-Developer documentation for %{name} for use with Qt Assistant
+Developer documentation for %{name} for use with Qt Assistant.
 
 %prep
 %autosetup -p1
